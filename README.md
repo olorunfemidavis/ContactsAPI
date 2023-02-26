@@ -4,7 +4,8 @@ API to manage contact CRUD operations.
 ## Tools
 C# .Net 6.0 and LiteDb. 
 
-## Authentication: Use: Bearer + {token}
+## Authentication: 
+Use: Bearer + {token}
 
 ## Non Check
 * Duplicate contacts. 
