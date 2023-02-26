@@ -7,6 +7,7 @@ public class SetPhonePayload
     /// <summary>
     /// Phone number in local format
     /// </summary>
+    /// <example>07001234455</example>
     [Required]
     public string Phone { get; set; }
 }
