@@ -3,22 +3,19 @@ using LiteDB;
 
 namespace ContactsAPI.Shared.Models.DbModels;
 
-/// <summary>
-/// Contact Model
-/// </summary>
-public class Contact:BaseDbModel
+public class User:BaseDbModel
 {
     [BsonId]
     public string Id { get; set; } = ObjectId.NewObjectId().ToString();
 
     /// <summary>
-    /// Contact Name
+    /// User Name
     /// </summary>
-    public string Name { get; set; }
+    public string UserName { get; set; }
     
     /// <summary>
-    /// Phone number in local format
+    /// Encoded Password
     /// </summary>
-    public string Phone { get; set; }
-
+    public string Password { get; set; }
+    
 }

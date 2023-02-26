@@ -1,4 +1,6 @@
+using ContactsAPI.Backend.Interfaces;
 using ContactsAPI.Backend.Services;
+using ContactsAPI.Shared.Models.General;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 //Register the Database
 builder.Services.AddSingleton<LiteDbService>();
 
+builder.Services.AddSingleton<IJwtAuthentication, AuthService>();
+
+// configure strongly typed settings object
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection(nameof(AppSettings)));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
