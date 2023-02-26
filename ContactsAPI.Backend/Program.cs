@@ -88,11 +88,18 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-{
+
     app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contact API");
+        c.InjectStylesheet("/swagger-ui/SwaggerDark.css");
+        c.RoutePrefix = string.Empty;
+    });
+
+app.UseDeveloperExceptionPage();
+
+app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 
