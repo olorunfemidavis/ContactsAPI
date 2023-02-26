@@ -38,7 +38,7 @@ namespace ContactsAPI.Backend.Controllers
             //Normalize the UserName
             payload.UserName = payload.UserName.ToLower();
 
-            User user = await _userRepository.GetUserByUserNameAsync(payload.UserName);
+            var user = await _userRepository.GetUserByUserNameAsync(payload.UserName);
             if(user is not {})
                 return BadRequest("Account does not Exist");
             

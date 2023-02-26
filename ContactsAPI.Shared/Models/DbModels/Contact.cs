@@ -11,6 +11,7 @@ public class Contact:BaseDbModel
     [BsonId]
     public string Id { get; set; } = ObjectId.NewObjectId().ToString();
 
+    public string UserId { get; set; }
     /// <summary>
     /// Contact Name
     /// </summary>

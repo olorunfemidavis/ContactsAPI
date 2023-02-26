@@ -13,33 +13,69 @@ public class ContactRepository : IEntityRepository<Contact>
         _liteDb = liteDb;
     }
 
-    public async Task<IEnumerable<Contact>> GetItemsAsync()
+    /// <summary>
+    /// Get Contacts with UserId and Pagination. Exclude deleted items.
+    /// </summary>
+    /// <param name="page"></param>
+    /// <param name="pageSize"></param>
+    /// <param name="userId"></param>
+    /// <returns></returns>
+    public Task<IEnumerable<Contact>> GetItemsAsync(uint page, uint pageSize, string userId)
     {
-        throw new NotImplementedException();
+        var skip = (int)(page-1) * (int)pageSize;
+        var limit = (int)Math.Max(0, pageSize);
+        
+        var list = _liteDb._contact.Query().Where(d => d.UserId == userId && !d.IsDeleted).Skip(skip).Limit(limit).ToEnumerable();
+        return Task.FromResult(list);
     }
 
-    public async Task<Contact?> GetItemByIdAsync(string id)
+    /// <summary>
+    /// Get Contact By Id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public Task<Contact> GetItemByIdAsync(string id)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(_liteDb._contact.FindById(id));
     }
 
-    public async Task InsertItemAsync(Contact item)
+    /// <summary>
+    /// Add new contact
+    /// </summary>
+    /// <param name="item"></param>
+    public Task InsertItemAsync(Contact item)
     {
-        throw new NotImplementedException();
+        _liteDb._contact.Insert(item);
+        return Task.CompletedTask;
     }
 
-    public async Task<bool> DeleteItemByIdAsync(string id)
+    /// <summary>
+    /// Delete Contact
+    /// </summary>
+    /// <param name="id"></param>
+    public Task DeleteItemByIdAsync(string id)
     {
-        throw new NotImplementedException();
+        _liteDb._contact.Delete(id);
+        return Task.CompletedTask;
     }
 
-    public async Task UpdateItemAsync(Contact item)
+    /// <summary>
+    /// Update Contact
+    /// </summary>
+    /// <param name="item"></param>
+    public Task UpdateItemAsync(Contact item)
     {
-        throw new NotImplementedException();
+        _liteDb._contact.Update(item);
+        return Task.CompletedTask;
     }
 
-    public async Task<bool> ItemExistsAsync(string id)
+    /// <summary>
+    /// Check if the Contact Exist
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public Task<bool> ItemExistsAsync(string id)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(_liteDb._contact.Exists(d => d.Id == id && !d.IsDeleted));
     }
 }

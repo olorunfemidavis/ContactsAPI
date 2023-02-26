@@ -8,4 +8,9 @@ public class AppSettings
     /// Token Expiration in Days
     /// </summary>
     public int TokenExpiration { get; set; }
+
+    /// <summary>
+    /// TIme in minutes to keep object alive until final deletion
+    /// </summary>
+    public int EntityDeleteTtlValue { get; set; }
 }
