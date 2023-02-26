@@ -3,6 +3,9 @@ using LiteDB;
 
 namespace ContactsAPI.Backend.Services;
 
+/// <summary>
+/// Storage Service powered by LiteDb
+/// </summary>
 public class LiteDbService
 {
     public readonly ILiteCollection<Contact> _contact;
@@ -13,7 +16,8 @@ public class LiteDbService
     {
         string liteDbLocation = Environment.GetEnvironmentVariable(nameof(liteDbLocation)) ?? Path.Combine(Path.GetTempPath(),"ContactData.db");
 
-        var database = new LiteDatabase(liteDbLocation);
+        var connectionString = $@"Filename={liteDbLocation}; Connection=Shared;";
+        var database = new LiteDatabase(connectionString);
 
         #region LoadCollections
 

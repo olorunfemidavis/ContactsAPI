@@ -73,7 +73,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddAutoMapper(typeof(GeneralMapping));
 
 //Register the Database
-builder.Services.AddSingleton<LiteDbService>();
+builder.Services.AddTransient<LiteDbService>();
 
 builder.Services.AddSingleton<IJwtAuthentication, AuthService>();
 
