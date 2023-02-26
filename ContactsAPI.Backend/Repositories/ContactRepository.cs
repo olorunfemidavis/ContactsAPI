@@ -78,4 +78,9 @@ public class ContactRepository : IEntityRepository<Contact>
     {
         return Task.FromResult(_liteDb._contact.Exists(d => d.Id == id && !d.IsDeleted));
     }
+
+    public Task<IEnumerable<Contact>> GetAllItemsAsync()
+    {
+        return Task.FromResult(_liteDb._contact.FindAll());
+    }
 }

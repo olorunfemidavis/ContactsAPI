@@ -11,6 +11,9 @@ using Microsoft.Extensions.Options;
 
 namespace ContactsAPI.Backend.Controllers
 {
+    /// <summary>
+    /// API to manage Contact CRUD operations
+    /// </summary>
     [Authorize]
     [Produces("application/json")]
     [Route("api/v1/[controller]")]
@@ -32,12 +35,9 @@ namespace ContactsAPI.Backend.Controllers
 
         /// <summary>
         /// Get a list of contacts for a User. 
-        /// <remarks>
-        /// Remarks 1
-        /// </remarks>
         /// </summary>
         /// <remarks>
-        /// Remarks 2
+        /// Pagination is Enabled
         /// </remarks>
         /// <param name="page"></param>
         /// <param name="pageSize"></param>

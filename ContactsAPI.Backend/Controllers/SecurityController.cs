@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ContactsAPI.Backend.Controllers
 {
+    /// <summary>
+    /// API to manage User CRUD operations
+    /// </summary>
     [AllowAnonymous]
     [Produces("application/json")]
     [Route("api/v1/[controller]")]
@@ -30,7 +33,7 @@ namespace ContactsAPI.Backend.Controllers
         /// <param name="payload"></param>
         /// <returns></returns>
         [HttpPost("Login")]
-        public async Task<ActionResult<LoginResponse>> Login([FromBody ]LoginRegisterPayload payload)
+        public async Task<ActionResult<LoginResponse>> Login([FromBody ]SecurityPayload payload)
         {
             if (string.IsNullOrWhiteSpace(payload.UserName) || string.IsNullOrWhiteSpace(payload.Password))
                 return BadRequest("Invalid Username or Password");
@@ -63,7 +66,7 @@ namespace ContactsAPI.Backend.Controllers
         /// <param name="payload"></param>
         /// <returns></returns>
         [HttpPost("Register")]
-        public async Task<ActionResult> RegisterUser([FromBody]LoginRegisterPayload payload)
+        public async Task<ActionResult> RegisterUser([FromBody]SecurityPayload payload)
         {
             if (string.IsNullOrWhiteSpace(payload.UserName) || string.IsNullOrWhiteSpace(payload.Password))
                 return BadRequest("Invalid Username or Password");
@@ -87,7 +90,11 @@ namespace ContactsAPI.Backend.Controllers
 
             newUser.Password = hashedPassword;
 
+            //Insert the new user. 
+            await _userRepository.InsertItemAsync(newUser);
+            
             return Ok("Account Created Successfully");
         }
+        
     }
 }

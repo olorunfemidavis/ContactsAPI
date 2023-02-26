@@ -11,7 +11,7 @@ public class LiteDbService
 
     public LiteDbService()
     {
-        string liteDbLocation = Environment.GetEnvironmentVariable(nameof(liteDbLocation)) ?? @"C:\Temp\ContactData.db";
+        string liteDbLocation = Environment.GetEnvironmentVariable(nameof(liteDbLocation)) ?? Path.Combine(Path.GetTempPath(),"ContactData.db");
 
         var database = new LiteDatabase(liteDbLocation);
 

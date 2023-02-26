@@ -63,6 +63,12 @@ public class UserRepository : IEntityRepository<User>
         return Task.FromResult(_liteDb._user.Exists(d => d.Id == id && !d.IsDeleted));
     }
 
+public Task<IEnumerable<User>> GetAllItemsAsync()
+{
+    var list = _liteDb._user.FindAll().ToList();
+    return Task.FromResult(list.AsEnumerable());
+}
+
 /// <summary>
 /// Get User by UserName
 /// </summary>

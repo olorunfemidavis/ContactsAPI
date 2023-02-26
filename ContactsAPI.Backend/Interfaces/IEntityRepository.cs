@@ -7,4 +7,12 @@ public interface IEntityRepository<T>
     Task DeleteItemByIdAsync(string id);
     Task UpdateItemAsync(T item);
     Task<bool> ItemExistsAsync(string id);
+
+
+    #region Test Methods
+
+    Task<IEnumerable<T>> GetAllItemsAsync();
+
+
+    #endregion
 }
